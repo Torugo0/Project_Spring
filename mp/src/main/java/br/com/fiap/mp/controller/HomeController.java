@@ -1,16 +1,17 @@
 package br.com.fiap.mp.controller;
 
-import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import br.com.fiap.mp.model.Pedido;
+import br.com.fiap.mp.model.entity.Pedido;
+import br.com.fiap.mp.model.repository.PedidoRepository;
 
-@Controller
+@RestController
 @RequestMapping("/home")
 public class HomeController {
     /*
@@ -20,20 +21,15 @@ public class HomeController {
      * ser chamada).
      */
 
+    @Autowired
+    private PedidoRepository pedidoRepository;
+
     @GetMapping
-    public String hello(Model model) {
-        Pedido pedido = new Pedido();
+    public ModelAndView hello() {
 
-        pedido.setNomeProduto("Big Mac");
-        pedido.setUrlImagem(
-                "https://cache-backend-mcd.mcdonaldscupones.com/media/image/product$kzXCTbnv/200/200/original?country=br");
-        pedido.setUrlProduto("https://www.mcdonalds.com.br/cardapio/sanduiches-de-carne-bovina/big-mac");
-        pedido.setDescricao(
-                "Dois hambúrgueres (100% carne bovina), alface americana, queijo processado sabor cheddar, molho especial, cebola, picles e pão com gergelim.");
-        List<Pedido> pedidos = Arrays.asList(pedido);
-
-        model.addAttribute("pedidos", pedidos);
-
-        return "home"; // Aqui retorna o nome da pasta, ele vai buscar isso em templates
+        List<Pedido> pedidos = pedidoRepository.findAll();
+        ModelAndView mv = new ModelAndView("home");
+        mv.addObject("pedidos", pedidos);
+        return mv; // Aqui retorna o nome da pasta, ele vai buscar isso em templates
     }
 }

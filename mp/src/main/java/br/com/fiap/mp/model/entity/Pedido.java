@@ -1,15 +1,34 @@
-package br.com.fiap.mp.model;
+package br.com.fiap.mp.model.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity(name = "Pedido")
+@Table(name = "pedido")
 public class Pedido {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long codigoProduto;
     private String nomeProduto;
     private BigDecimal valorNegociado;
     private LocalDate dataDaEntrega;
     private String urlProduto;
     private String urlImagem;
     private String descricao;
+
+    public Long getCodigoProduto() {
+        return codigoProduto;
+    }
+
+    public void setCodigoProduto(Long codigoProduto) {
+        this.codigoProduto = codigoProduto;
+    }
 
     public String getNomeProduto() {
         return nomeProduto;
