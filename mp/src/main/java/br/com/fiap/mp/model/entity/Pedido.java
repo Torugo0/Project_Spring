@@ -3,6 +3,7 @@ package br.com.fiap.mp.model.entity;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import br.com.fiap.mp.model.dto.RequisicaoNovoPedido;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,15 @@ public class Pedido {
     private String urlProduto;
     private String urlImagem;
     private String descricao;
+
+    public Pedido(){}
+
+    public Pedido(RequisicaoNovoPedido requisicao){
+        this.nomeProduto = requisicao.nomeProduto();
+        this.urlProduto = requisicao.urlProduto();
+        this.urlImagem = requisicao.urlImagem();
+        this.descricao = requisicao.descricao();
+    }
 
     public Long getCodigoProduto() {
         return codigoProduto;
