@@ -9,11 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="p-4 mb-2 bg-body-tertiary rounded-3">
-            <div class="container-fluid py-5">
-                <h1 class="display-5 fw-bold">Novo Pedido</h1>
-            </div>
-        </div>
+        <div th:replace="~{base :: titulo('Novo Pedido')}"></div>
 
         <div class="card mt-3">
             <form th:object="${requisicaoNovoPedido}" class="card-body" action="/pedido/novo" method="POST">
