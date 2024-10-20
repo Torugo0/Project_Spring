@@ -1,6 +1,7 @@
 package br.com.fiap.mp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import br.com.fiap.mp.model.dto.RequisicaoNovoPedido;
 import br.com.fiap.mp.model.entity.Pedido;
 import br.com.fiap.mp.model.repository.PedidoRepository;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/pedido")
@@ -19,16 +21,23 @@ public class PedidoController {
     private PedidoRepository pedidoRepository;
 
     @GetMapping("/formulario")
-    public ModelAndView formulario(){
+    public ModelAndView formulario(RequisicaoNovoPedido requisicao){
         ModelAndView mv = new ModelAndView("pedido/formulario");
         return mv;
     }
 
     @PostMapping("/novo")
-    public ModelAndView novo(RequisicaoNovoPedido requisicao){
+    public ModelAndView novo(@Valid RequisicaoNovoPedido requisicao, BindingResult result){
+        ModelAndView mv;
+
+        if (result.hasErrors()){
+            mv = new ModelAndView("pedido/formulario");
+            return mv;
+        }
+
         Pedido pedido = new Pedido(requisicao);
         pedidoRepository.save(pedido);
-        ModelAndView mv = new ModelAndView("redirect:/home");
+        mv = new ModelAndView("redirect:/home");
         return mv;
     }
 }

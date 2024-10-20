@@ -15,31 +15,34 @@
             </div>
         </div>
 
-        <div>
-            <form action="/pedido/novo" method="POST">
-                <div>
+        <div class="card mt-3">
+            <form th:object="${requisicaoNovoPedido}" class="card-body" action="/pedido/novo" method="POST">
+                <div class="form-group">
                     <label for="nomeProduto">Produto</label>
-                    <input id="nomeProduto" name="nomeProduto" placeholder="Nome do produto">
+                    <input class="form-control" th:field="*{nomeProduto}" th:errorclass="is-invalid" id="nomeProduto" name="nomeProduto" placeholder="Nome do produto">
                     <small>Informa qual é o nome do produto</small>
+                    <div th:errors="*{nomeProduto}" class="invalid-feedback">Erro do nome do produto</div>
                 </div>
 
-                <div>
+                <div class="form-group">
                     <label for="urlProduto">Produto</label>
-                    <input id="urlProduto" name="urlProduto" placeholder="URL do produto">
+                    <input class="form-control" th:field="*{urlProduto}" th:errorclass="is-invalid" id="urlProduto" name="urlProduto" placeholder="URL do produto">
                     <small>Procure em um site o produto que deseja e cole a URL da página aqui</small>
+                    <div th:errors="*{urlProduto}" class="invalid-feedback">Erro da da URL do produto</div>
                 </div>
 
-                <div>
+                <div class="form-group">
                     <label for="urlImagem">Produto</label>
-                    <input id="urlImagem" name="urlImagem" placeholder="URL da imagem">
+                    <input class="form-control" th:field="*{urlImagem}" th:errorclass="is-invalid" id="urlImagem" name="urlImagem" placeholder="URL da imagem">
                     <small>Copie a URL de uma boa imagem do produto e cole aqui para ajudar o comprador</small>
+                    <div th:errors="*{urlImagem}" class="invalid-feedback">Erro da URL da imagem</div>
                 </div>
 
-                <div>
+                <div class="form-group">
                     <label for="descricao">Produto</label>
-                    <textarea id="descricao" name="descricao" placeholder="Adicione detalhes importantes para ajudar o comprador"></textarea>
+                    <textarea class="form-control" th:field="*{descricao}" id="descricao" name="descricao" placeholder="Adicione detalhes importantes para ajudar o comprador"></textarea>
                 </div>
-                <button type="submit">Cadastrar</button>
+                <button class="btn btn-primary mt-3" type="submit">Cadastrar</button>
             </form>
         </div>
 
