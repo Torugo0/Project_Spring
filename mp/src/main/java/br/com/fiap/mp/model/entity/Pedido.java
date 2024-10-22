@@ -5,6 +5,8 @@ import java.time.LocalDate;
 
 import br.com.fiap.mp.model.dto.RequisicaoNovoPedido;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,13 +25,26 @@ public class Pedido {
     private String urlImagem;
     private String descricao;
 
-    public Pedido(){}
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
 
-    public Pedido(RequisicaoNovoPedido requisicao){
+    public Pedido() {
+    }
+
+    public Pedido(RequisicaoNovoPedido requisicao) {
         this.nomeProduto = requisicao.nomeProduto();
         this.urlProduto = requisicao.urlProduto();
         this.urlImagem = requisicao.urlImagem();
         this.descricao = requisicao.descricao();
+        this.status = StatusPedido.AGUARDANDO;
+    }
+
+    public StatusPedido getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusPedido status) {
+        this.status = status;
     }
 
     public Long getCodigoProduto() {
