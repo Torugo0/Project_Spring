@@ -18,7 +18,7 @@ import br.com.fiap.mp.model.repository.PedidoRepository;
 @RequestMapping("/home")
 public class HomeController {
     /*
-     * @GetMapping no método hello(), indicado aoSpring MVC que este método que deve
+     * @GetMapping no método hello(), indicado ao Spring MVC que este método que deve
      * ser executado ao receber uma requisição do tipo GET. Observe que este método
      * retorna apenas uma String (que neste nosso exemplo é o nome da hello que deve
      * ser chamada).
